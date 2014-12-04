@@ -5,11 +5,12 @@ import (
 	"unsafe"
 	"os"
 	"log"
+	"time"
 )
 
 func main() {
-	ts := []syscall.Timespec{{0, 0}, {0, 0}}
-	if err := LUtimesNano(os.Args[1], ts); err != nil {
+	t := time.Unix(0, 0)
+	if err := os.Chtimes(os.Args[1], t, t); err != nil {
 		log.Fatal(err)
 	}
 }
